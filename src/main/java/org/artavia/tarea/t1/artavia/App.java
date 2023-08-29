@@ -7,6 +7,9 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import java.io.IOException;
 
+import org.artavia.tarea.t1.artavia.model.AsmModel;
+import org.artavia.tarea.t1.artavia.model.MemoryModel;
+
 /** JavaFX App */
 public class App extends Application {
 
@@ -29,6 +32,14 @@ public class App extends Application {
   }
 
   public static void main(String[] args) {
+
+    String filepath = "/home/alex/Descargas/Test01.asm";
+
+    MemoryModel appMemory = new MemoryModel();
+    AsmModel asmFile = new AsmModel(filepath);
+    appMemory.asignRandomAddresses(asmFile.getInstructions());
+    appMemory.printMemoryTerminal();
+
     launch();
   }
 }

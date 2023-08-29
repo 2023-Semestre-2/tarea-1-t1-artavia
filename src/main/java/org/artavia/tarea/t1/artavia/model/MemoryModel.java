@@ -2,6 +2,7 @@ package org.artavia.tarea.t1.artavia.model;
 
 import java.util.Map;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Random;
 
 /** This class represents the memory of this minicomputer, assembly instructions will be stored. */
@@ -47,11 +48,23 @@ public class MemoryModel {
   /**
    * Asigns randoms locations to instructions.
    *
+   * @param instructions.
+   */
+  public void asignRandomAddresses(List<String> instructions) {
+
+    for (String instruction : instructions) {
+      asignRandomAddress(instruction, getProgramMemory(), instructions.size());
+    }
+  }
+
+  /**
+   * Asigns a random location to a instruction.
+   *
    * @param instruction.
    * @param programMemory.
    * @param instructionsLength.
    */
-  public void asignRandomAddress(
+  private void asignRandomAddress(
       String instruction, Map<Integer, String> programMemory, int instructionsLength) {
 
     // Boolean to check if memory is empty
@@ -94,7 +107,7 @@ public class MemoryModel {
     int maxAdreess = 100 - instructionsLength;
 
     if (maxAdreess < minAddress) {
-      System.out.println("No hay suficiente espacio para las instrucciones.");
+      System.out.println("Not enough space memory space for instructions.");
       return;
     }
 
@@ -116,7 +129,7 @@ public class MemoryModel {
   }
 
   /** Prints all the memory keys and values in terminal. */
-  private void printMemoryTerminal() {
+  public void printMemoryTerminal() {
     for (Integer address : programMemory.keySet()) {
       System.out.println("Address: " + address + " | Instruction: " + programMemory.get(address));
     }
